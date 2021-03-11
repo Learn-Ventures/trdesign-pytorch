@@ -27,7 +27,7 @@ seed_filepath       = None # Sample starting sequences 100% at random
 sequence_constraint = None
 
 # Constraint can be specified as an .npz file containing ['dist', 'omega', 'theta', 'phi'] target arrays
-#target_motif_path   = 'target_motifs/sso7d/from_pdb/sso7d_model.npz'
+#target_motif_path   = 'target_motifs/target.npz'
 target_motif_path   = None
 
 experiment_name = 'proteins_len_%d_%d_steps' %(LEN, MCMC['N_STEPS'])
