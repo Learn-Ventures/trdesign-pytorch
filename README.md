@@ -6,7 +6,7 @@ The official TensorFlow implementation is [here.](https://github.com/gjoni/trDes
 
 The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
 ## Usage (protein structure prediction):
-simply run:
+Simply run:
 - cd src/
 - python predict.py path_to_some_a3m_file.a3m
 or 
@@ -19,9 +19,9 @@ or
 
 ## Configuration options:
 - Sequence length (int)
-- AA_weight (float): how strongly we want the amino acid type composition to be 'natural'
-- RM_AA (string): disable specific amino acid types
-- n_models (int): how many trRosetta model ensembles we want to use during the MCMC loop
-- sequence constraint: fix a subset of the sequence residues to specific amino acids
-- target_motif: optimize a sequence with a target motif provided as a .npz file
+- AA_weight (float)    : how strongly we want the amino acid type composition to be 'natural'
+- RM_AA (string)       : disable specific amino acid types
+- n_models (int)       : how many trRosetta model ensembles we want to use during the MCMC loop
+- sequence constraint (string): fix a subset of the sequence residues to specific amino acids
+- target_motif (path)  : optimize a sequence with a target motif provided as a .npz file
 - MCMC options
