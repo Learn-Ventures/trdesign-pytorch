@@ -1,10 +1,14 @@
 # trdesign-pytorch
-This repository is a PyTorch implementation of the [trDesign paper.](https://www.biorxiv.org/content/10.1101/2020.07.22.211482v1.full.pdf)
-The official TensorFlow implementation is [here.](https://github.com/gjoni/trDesign)
+This repository is a PyTorch implementation of the [trDesign paper][1].
+The official TensorFlow implementation is [here](https://github.com/gjoni/trDesign). The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
 
-![Alt text](assets/trDesign.jpg?raw=true "Title")
+![Figure 1: trDesign Architecture](assets/trDesign.jpg?raw=true "trDesign Architecture")
 
-The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
+<small>Figure 1 of <em>De novo protein design by deep network hallucination</em> (p. 12, [Anishchenko et al.][1], [CC-BY-ND][cc-by-nd])</small>
+
+[1]: https://www.biorxiv.org/content/10.1101/2020.07.22.211482v1.full.pdf
+[cc-by-nd]: https://creativecommons.org/licenses/by-nc-nd/4.0/
+
 ## Usage (protein structure prediction):
 Simply run:
 - cd src/
