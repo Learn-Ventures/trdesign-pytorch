@@ -1,4 +1,3 @@
-import numpy as np
 
 ########################################################################################
 ##################################### Design Config: ###################################
@@ -39,6 +38,7 @@ experiment_name = 'proteins_len_%d_%d_steps' %(LEN, MCMC['N_STEPS'])
 ####################################### Constants: #####################################
 
 # These settings are specific to the trRosetta Model implementation (might need to change for AF2)
+import numpy as np
 
 limits = {
     'dist':  [2,      20   ],
