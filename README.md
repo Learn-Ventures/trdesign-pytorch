@@ -5,8 +5,14 @@ The official TensorFlow implementation is [here.](https://github.com/gjoni/trDes
 ![Alt text](assets/trDesign.jpg?raw=true "Title")
 
 The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
+## Usage (protein structure prediction):
+simply run:
+- cd src/
+- python predict.py path_to_some_a3m_file.a3m
+or 
+- python predict.py path_to_some_fasta_file.fasta
 
-## Usage:
+## Usage (protein design):
 1. edit src/config.py to set the experiment configuration
 2. run python run.py
 3. All results will be saved under results/
