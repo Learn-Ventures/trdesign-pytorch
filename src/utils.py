@@ -9,7 +9,7 @@ from torch import nn
 
 import config as cfg
 
-def d(tensor=None, force_cpu = False):
+def d(tensor=None, force_cpu = True):
     if force_cpu:
         return 'cpu'
 

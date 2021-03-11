@@ -26,10 +26,6 @@ seed_filepath       = None # Sample starting sequences 100% at random
 #sequence_constraint = '--C------------------------------------------------------C--'
 sequence_constraint = None
 
-residue_distance_range  = [0,6]
-residu_distance_indices = [2, -3]
-residu_distance_weight  = -5.0
-
 # Constraint can be specified as an .npz file containing ['dist', 'omega', 'theta', 'phi'] target arrays
 #target_motif_path   = 'target_motifs/sso7d/from_pdb/sso7d_model.npz'
 target_motif_path   = None
