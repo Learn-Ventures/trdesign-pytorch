@@ -1,10 +1,8 @@
 # trdesign-pytorch
-A PyTorch implementation of trDesign
-
-![Alt text](assets/trDesign.jpg?raw=true "Title")
-
 This repository is a PyTorch implementation of the [trDesign paper.](https://www.biorxiv.org/content/10.1101/2020.07.22.211482v1.full.pdf)
 The official TensorFlow implementation is [here.](https://github.com/gjoni/trDesign)
+
+![Alt text](assets/trDesign.jpg?raw=true "Title")
 
 The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
 
