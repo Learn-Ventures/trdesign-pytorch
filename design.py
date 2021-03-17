@@ -25,7 +25,7 @@ def get_sequence(i, L, aa_valid, seed_file=None):
     Otherwise, return a completely random sequence using `aa_valid` symbols.
     """
     return (
-        linecache.getline(seed_file, i)[:L]
+        linecache.getline(seed_file, i + 1)[:L]
         if seed_file
         else utils.idx2aa(np.random.choice(aa_valid, L))
     )
