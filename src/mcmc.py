@@ -5,8 +5,8 @@ from datetime import datetime
 import time
 
 # lib
-import torch
 import numpy as np
+import torch
 
 # pkg
 from losses import *  # pylint: disable=wildcard-import, unused-wildcard-import
@@ -23,10 +23,10 @@ def v(torch_value):
         return torch_value
 
 
-# TODO: Should this inherit from `nn.Module`?
 class MCMC_Optimizer(torch.nn.Module):
     """Markov Chain Monte Carlo optimizer."""
 
+    # We don't define `.forward()`, but it's nn-based.
     # pylint: disable=too-many-instance-attributes, abstract-method
 
     DEFAULT_ROOT_PATH = Path(__file__).parent.parent
@@ -56,8 +56,7 @@ class MCMC_Optimizer(torch.nn.Module):
             trRosetta_model_dir
         )  # .share_memory()
         print(
-            "%d structure prediction models loaded to %s"
-            % (self.structure_models.n_models, d())
+            f"{self.structure_models.n_models} structure prediction models loaded to {d()}"
         )
 
         # General params:

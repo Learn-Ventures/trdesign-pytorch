@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 """Run the trDesign loop."""
-# pylint: disable=wrong-import-position, wildcard-import, unused-wildcard-import
 
 # native
 from pathlib import Path
 import linecache
 import sys
 
-# import warnings
-# warnings.filterwarnings("ignore", category=FutureWarning)
-
 # lib
 import numpy as np
 
 # pkg
+# pylint: disable=wrong-import-position
 script_dir = Path(__file__).parent
 sys.path[0:0] = [str(script_dir / "src"), str(script_dir)]
 
