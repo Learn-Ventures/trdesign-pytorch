@@ -63,25 +63,6 @@ def fast_dca(msa1hot, weights, penalty=4.5):
     return torch.cat((features, contacts[:, :, None]), dim=2)
 
 
-# # read A3M and convert letters into
-# # integers in the 0..20 range
-# def parse_a3m(filename):
-#     table = str.maketrans(dict.fromkeys(string.ascii_lowercase))
-#     seqs = [
-#         line.strip().translate(table) for line in open(filename, "r") if line[0] != ">"
-#     ]
-#     alphabet = np.array(list("ARNDCQEGHILKMFPSTWYV-"), dtype="|S1").view(np.uint8)
-#     msa = np.array([list(s) for s in seqs], dtype="|S1").view(np.uint8)
-
-#     # convert letters into numbers
-#     for i in range(alphabet.shape[0]):
-#         msa[msa == alphabet[i]] = i
-
-#     # treat all unknown characters as gaps
-#     msa[msa > 20] = 20
-#     return msa
-
-
 def prep_seq(a3m, wmin=0.8, ns=21):
     """Return a one-hot encoded MSA for the given sequences."""
     nrow, ncol = a3m.shape

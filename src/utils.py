@@ -55,6 +55,7 @@ def parse_a3m(filename):
     seqs = []
     table = str.maketrans(dict.fromkeys(string.ascii_lowercase))
 
+    # TODO: add support for multi-line sequences
     # read file line by line
     for line in Path(filename).open():
         # skip labels
