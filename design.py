@@ -18,14 +18,6 @@ import mcmc
 import utils
 import config as cfg
 
-
-def print_section(pre_newlines=0, post_newlines=0, num_spacers=40):
-    """Print a section header."""
-    nl = "\n"
-    spacers = "#" * num_spacers
-    print(f"{nl * pre_newlines}\n{spacers}\n{spacers}\n{nl * post_newlines}")
-
-
 def get_sequence(i, L, aa_valid, seed_file=None):
     """Return a sequence of length `L`.
 
@@ -58,8 +50,8 @@ def main():
 
     seqs, seq_metrics = [], []
     for i in range(cfg.num_simulations):
-        print_section(pre_newlines=2, post_newlines=2)
-        print(f"Optimizing sequence {i:04} of {cfg.num_simulations:04}...")
+        print("#####################################")
+        print(f"\n --- Optimizing sequence {i:04} of {cfg.num_simulations:04}...")
 
         mcmc_optim = mcmc.MCMC_Optimizer(
             cfg.LEN,
