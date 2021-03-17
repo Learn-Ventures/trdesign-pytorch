@@ -23,7 +23,7 @@ def v(torch_value):
 
 
 # TODO: Should this inherit from `nn.Module`?
-class MCMC_Optimizer(nn.Module):
+class MCMC_Optimizer(torch.nn.Module):
     """Markov Chain Monte Carlo optimizer."""
 
     # pylint: disable=too-many-instance-attributes, abstract-method
