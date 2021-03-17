@@ -18,23 +18,13 @@ Requires python 3.6+
 pip install matplotlib numpy torch
 ```
 
-## Usage (protein structure prediction):
-
-Simply run:
-
-```bash
-python predict.py path_to_a3m_file.a3m
-# or
-python predict.py path_to_fasta_file.fasta
-```
-
 ## Usage (protein design):
 
-1. edit `src/config.py` to set the experiment configuration
-2. run `python design.py`
+1. Edit `src/config.py` to set the experiment configuration.
+2. Run `python design.py`
 3. All results will be saved under `results/`
 
-## Configuration options:
+## Design Configuration Options
 
 - Sequence length (`int`)
 - AA_weight (`float`): how strongly we want the amino acid type composition to be 'natural'
@@ -43,6 +33,23 @@ python predict.py path_to_fasta_file.fasta
 - sequence constraint (`str`): fix a subset of the sequence residues to specific amino acids
 - target_motif (`path`): optimize a sequence with a target motif provided as an `.npz` file
 - MCMC options
+
+## Usage (protein structure prediction):
+
+```bash
+python predict.py example.a3m
+# or
+python predict.py example.fasta
+```
+
+To get a `.pdb` from the resulting `.npz` you need to [request the `trRosetta`
+package](https://yanglab.nankai.edu.cn/trRosetta/download/) from the original authors.
+
+Then you can run:
+
+```bash
+python trRosetta.py example.npz example.fasta output.pdb -w /tmp
+```
 
 ## References
 
