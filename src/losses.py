@@ -6,6 +6,7 @@ from pathlib import Path
 # lib
 import numpy as np
 import torch
+from torch import nn
 
 # pkg
 from utils import d, plot_distogram

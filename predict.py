@@ -15,6 +15,9 @@ import numpy as np
 import torch
 
 # pkg
+script_dir = Path(__file__).parent
+sys.path[0:0] = [str(script_dir / "src"), str(script_dir)]
+
 from tr_Rosetta_model import trRosettaEnsemble, preprocess
 import utils
 

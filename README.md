@@ -12,7 +12,7 @@ This repository is a PyTorch implementation of the [trDesign paper][1] based on 
 
 ## Requirements
 
-Requires python 3.8+
+Requires python 3.6+
 
 ```bash
 pip install matplotlib numpy torch
@@ -31,7 +31,7 @@ python predict.py path_to_fasta_file.fasta
 ## Usage (protein design):
 
 1. edit `src/config.py` to set the experiment configuration
-2. run `python run.py`
+2. run `python design.py`
 3. All results will be saved under `results/`
 
 ## Configuration options:
