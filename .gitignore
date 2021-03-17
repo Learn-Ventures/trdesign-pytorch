@@ -6,6 +6,7 @@ _ignore*
 .idea
 .vim
 .vscode
+*.code-workspace
 
 # test
 .coverage

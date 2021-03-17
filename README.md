@@ -1,6 +1,7 @@
 # trdesign-pytorch
-This repository is a PyTorch implementation of the [trDesign paper][1].
-The official TensorFlow implementation is [here](https://github.com/gjoni/trDesign). The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
+
+This repository is a PyTorch implementation of the [trDesign paper][1] based on the
+[official TensorFlow implementation](https://github.com/gjoni/trDesign). The initial port of the trRosetta network was done by [@lucidrains](https://github.com/lucidrains).
 
 ![Figure 1: trDesign Architecture](assets/trDesign.jpg?raw=true "trDesign Architecture")
 
@@ -10,27 +11,31 @@ The official TensorFlow implementation is [here](https://github.com/gjoni/trDesi
 [cc-by-nd]: https://creativecommons.org/licenses/by-nc-nd/4.0/
 
 ## Requirements
-Requires python 3.8+.
+
+Requires python 3.8+
 
 ```bash
 pip install matplotlib numpy torch
 ```
 
 ## Usage (protein structure prediction):
+
 Simply run:
+
 ```bash
-cd src
-python predict.py path_to_some_a3m_file.a3m
+python predict.py path_to_a3m_file.a3m
 # or
-python predict.py path_to_some_fasta_file.fasta
+python predict.py path_to_fasta_file.fasta
 ```
 
 ## Usage (protein design):
+
 1. edit `src/config.py` to set the experiment configuration
 2. run `python run.py`
 3. All results will be saved under `results/`
 
 ## Configuration options:
+
 - Sequence length (`int`)
 - AA_weight (`float`): how strongly we want the amino acid type composition to be 'natural'
 - RM_AA (`str`): disable specific amino acid types
@@ -38,3 +43,41 @@ python predict.py path_to_some_fasta_file.fasta
 - sequence constraint (`str`): fix a subset of the sequence residues to specific amino acids
 - target_motif (`path`): optimize a sequence with a target motif provided as an `.npz` file
 - MCMC options
+
+## References
+
+```bibtex
+@article {Yang1496,
+	author = {Yang, Jianyi and Anishchenko, Ivan and Park, Hahnbeom and Peng, Zhenling and Ovchinnikov, Sergey and Baker, David},
+	title = {Improved protein structure prediction using predicted interresidue orientations},
+	year = {2020},
+	doi = {10.1073/pnas.1914677117},
+	URL = {https://www.pnas.org/content/117/3/1496},
+	eprint = {https://www.pnas.org/content/117/3/1496.full.pdf},
+	journal = {Proceedings of the National Academy of Sciences}
+}
+```
+
+```bibtex
+@article {Anishchenko2020.07.22.211482,
+	author = {Anishchenko, Ivan and Chidyausiku, Tamuka M. and Ovchinnikov, Sergey and Pellock, Samuel J. and Baker, David},
+	title = {De novo protein design by deep network hallucination},
+	year = {2020},
+	doi = {10.1101/2020.07.22.211482},
+	URL = {https://www.biorxiv.org/content/early/2020/07/23/2020.07.22.211482},
+	eprint = {https://www.biorxiv.org/content/early/2020/07/23/2020.07.22.211482.full.pdf},
+	journal = {bioRxiv}
+}
+```
+
+```bibtex
+@article {Tischer2020.11.29.402743,
+	author = {Tischer, Doug and Lisanza, Sidney and Wang, Jue and Dong, Runze and Anishchenko, Ivan and Milles, Lukas F. and Ovchinnikov, Sergey and Baker, David},
+	title = {Design of proteins presenting discontinuous functional sites using deep learning},
+	year = {2020},
+	doi = {10.1101/2020.11.29.402743},
+	URL = {https://www.biorxiv.org/content/early/2020/11/29/2020.11.29.402743},
+	eprint = {https://www.biorxiv.org/content/early/2020/11/29/2020.11.29.402743.full.pdf},
+	journal = {bioRxiv}
+}
+```

@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Structure prediction."""
+"""Structure prediction.
+
+Based on the implementation by @lucidrains:
+https://github.com/lucidrains/tr-rosetta-pytorch/blob/main/tr_rosetta_pytorch/cli.py
+"""
 
 # native
 from inspect import cleandoc
@@ -55,13 +59,21 @@ def main():
 
     Examples:
 
-    $ python predict.py data/test.a3m
-    $ python predict.py data/test.fasta
+    $ ./predict.py data/test.a3m
+    $ ./predict.py data/test.fasta
     """
+    show_usage = False
     args = sys.argv[1:]
+    if len(args) == 1 and args[0] in ["-h", "--help"]:
+        show_usage = True
     if not 1 <= len(args) <= 2:
-        print(f"ERROR: Unknown number of arguments.\n\n{cleandoc(main.__doc__)}\n")
+        show_usage = True
+        print("ERROR: Unknown number of arguments.\n\n")
+
+    if show_usage:
+        print(f"{cleandoc(main.__doc__)}\n")
         sys.exit(1)
+
     get_ensembled_predictions(*args)  # pylint: disable=no-value-for-parameter
 
 

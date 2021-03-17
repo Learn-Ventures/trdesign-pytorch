@@ -1,4 +1,8 @@
-"""Helpful utilities."""
+"""Helpful utilities.
+
+Many of these are based on the work by @lucidrains:
+https://github.com/lucidrains/tr-rosetta-pytorch/blob/main/tr_rosetta_pytorch/utils.py
+"""
 
 # native
 from pathlib import Path

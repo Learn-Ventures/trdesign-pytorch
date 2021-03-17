@@ -1,7 +1,8 @@
 """
+Structure prediction models.
 
 Based on the pytorch implementation by @lucidrains:
-https://github.com/lucidrains
+https://github.com/lucidrains/tr-rosetta-pytorch/blob/main/tr_rosetta_pytorch/tr_rosetta_pytorch.py
 """
 
 # native
