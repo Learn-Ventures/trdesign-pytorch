@@ -1,0 +1,18 @@
+# general
+_ignore*
+.venv
+
+# editors
+.idea
+.vim
+.vscode
+
+# test
+.coverage
+.pytest_cache
+/htmlcov
+
+# build
+*.egg-info
+/build
+/dist
