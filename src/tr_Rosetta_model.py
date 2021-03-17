@@ -15,7 +15,7 @@ import torch
 import torch.nn.functional as F
 
 # pkg
-from utils import d, parse_a3m, plot_distogram, distogram_distribution_to_distogram
+from utils import d, parse_a3m, plot_distogram, distogram_distribution_to_distogram, average_dict
 
 
 def msa2pssm(msa1hot, w):
@@ -203,7 +203,13 @@ class trRosettaNetwork(nn.Module):
         # prob_bb = self.to_prob_bb(x)            # beta-strand pairings (not used)
         prob_omega = self.to_prob_omega(x)  # anglegrams for omega
 
-        return prob_theta, prob_phi, prob_distance, prob_omega
+        output = {}
+        output['dist']  = prob_distance
+        output['omega'] = prob_omega
+        output['theta'] = prob_theta
+        output['phi']   = prob_phi
+
+        return output
 
 
 class trRosettaEnsemble(nn.Module):
@@ -250,20 +256,15 @@ class trRosettaEnsemble(nn.Module):
         # TODO: Make this forward pass use parallel GPU threads
         outputs = []
         for i, structure_model in enumerate(self.models[:use_n_models]):
-            # with torch.cuda.stream(self.cuda_streams[i]):
             outputs.append(structure_model(x))
 
         if dump_distograms_path:
             dump_distograms_path = Path(dump_distograms_path)
             for i, output in enumerate(outputs):
-                pt, pp, pd, po = output  # pylint: disable=unused-variable
-                distogram_distribution = pd.cpu().detach().numpy()
+                distogram_distribution = output['dist'].cpu().detach().numpy()
                 distogram = distogram_distribution_to_distogram(distogram_distribution)
                 plot_distogram(
                     distogram, dump_distograms_path / f"dist_model_{i:02}.jpg"
                 )
 
-        averaged_outputs = [
-            torch.stack(model_output).mean(axis=0) for model_output in zip(*outputs)
-        ]
-        return averaged_outputs
+        return average_dict(outputs)

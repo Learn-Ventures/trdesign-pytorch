@@ -7,7 +7,7 @@ import numpy as np
 # Set a random seed?
 # np.random.seed(seed=1234)
 
-LEN = 45  # sequence length
+LEN = 60  # sequence length
 AA_WEIGHT = 1.0  # weight for the AA composition biasing loss term
 RM_AA = ""  # comma-separated list of specific amino acids to disable from being sampled (ex: 'C,F')
 n_models = 1  # How many structure prediction models to ensemble? [1-5]
@@ -26,8 +26,7 @@ seed_filepath = None  # Sample starting sequences 100% at random
 
 # keep certain positions at specific residues (e.g., "---A---C---")
 sequence_constraint = None
-
-# Constraint can be specified as an .npz file containing ['dist', 'omega', 'theta', 'phi'] target arrays
+# Constraint can be specified as an .npz file containing ['dist', 'omega', 'theta', 'phi'] target arrays of shape LxL
 # target_motif_path   = 'target_motifs/target.npz'
 target_motif_path = None
 

@@ -113,12 +113,12 @@ class Structural_Background_Loss(torch.nn.Module):
 
         return bkg
 
-    def forward(self, pd, po, pt, pp, hallucination_mask=None):
+    def forward(self, structure_distributions, hallucination_mask=None):
         """Return the total background loss."""
-        kl_dist = -kl_div(pd, self.bd, mask=hallucination_mask)
-        kl_omega = -kl_div(po, self.bo, mask=hallucination_mask)
-        kl_theta = -kl_div(pt, self.bt, mask=hallucination_mask)
-        kl_phi = -kl_div(pp, self.bp, mask=hallucination_mask)
+        kl_dist = -kl_div(structure_distributions['dist'], self.bd, mask=hallucination_mask)
+        kl_omega = -kl_div(structure_distributions['omega'], self.bo, mask=hallucination_mask)
+        kl_theta = -kl_div(structure_distributions['theta'], self.bt, mask=hallucination_mask)
+        kl_phi = -kl_div(structure_distributions['phi'], self.bp, mask=hallucination_mask)
 
         # TODO: consider np.dot?
         parts = [kl_dist, kl_omega, kl_theta, kl_phi]
@@ -154,7 +154,7 @@ class Motif_Satisfaction(torch.nn.Module):
         self.seq_L = self.mask.shape[0]
 
         save_dir = Path(save_dir) if save_dir else None
-
+        
         # If the target is larger than the sequence, crop out a section of seq_L x seq_L:
         # start_i = 0  # Start at the top left
         for key in self.keys:
@@ -188,20 +188,13 @@ class Motif_Satisfaction(torch.nn.Module):
 
     def forward(self, structure_distributions):
         """ returns a loss wrt a target motif """
-        pred = {}
-        (
-            pred["theta"],
-            pred["phi"],
-            pred["dist"],
-            pred["omega"],
-        ) = structure_distributions
 
         # - Get the probabilities for the bins corresponding to the target motif
         # - Compute the crossentropy and average over the entire LxL matrix
         # - Multiply with the mask
         motif_loss = 0
         for key in self.keys:
-            distribution = pred[key].squeeze()
+            distribution = structure_distributions[key].squeeze()
             probs = torch.gather(distribution, 0, self.bin_indices[key])
             log_probs = torch.log(probs)
             motif_loss -= (log_probs * self.mask).mean()

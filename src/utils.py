@@ -32,6 +32,20 @@ def distance_to_bin_id(angstrom_distance: float):
     # return the corresponding bin_id from trRosetta['dist'] prediction
     return (np.abs(cfg.bin_dict_np["dist"] - angstrom_distance)).argmin()
 
+def average_dict(list_of_dicts, detach = False):
+    """Returns a dict where each entry contains the average of the tensors for that key"""
+    averaged_outputs = {}
+    for key in list_of_dicts[0].keys():
+        key_values = []
+        for dict_el in list_of_dicts:
+            key_values.append(dict_el[key])
+
+        averaged_outputs[key] = torch.stack(key_values).mean(axis=0)
+
+        if detach:
+            averaged_outputs[key] = averaged_outputs[key].cpu().detach().numpy()
+
+    return averaged_outputs
 
 def parse_a3m(filename):
     """Return the contents of an `.a3m` file as integers.

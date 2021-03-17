@@ -79,6 +79,9 @@ class MCMC_Optimizer(torch.nn.Module):
 
         self.seq_constraint = sequence_constraint
         if self.seq_constraint is not None:
+            assert len(self.seq_constraint) == self.seq_L, \
+            "Constraint length (%d) must == Seq_L (%d)" %(len(self.seq_constraint), self.seq_L)
+
             self.seq_constraint = (
                 aa2idx(self.seq_constraint).copy().reshape([1, self.seq_L])
             )
@@ -137,16 +140,14 @@ class MCMC_Optimizer(torch.nn.Module):
 
     def loss(self, sequence, structure_predictions, msa1hot, track=False):
         """Compute the loss function."""
-        # pylint: disable=too-many-locals, unused-argument
-        pt, pp, pd, po = structure_predictions
 
         # Top-prob:
-        TM_score_proxy = top_prob(pd, verbose=False)
+        TM_score_proxy = top_prob(structure_predictions['dist'], verbose=False)
         TM_score_proxy = TM_score_proxy[0]  # We're running with batch_size = 1
 
         # Background KL-loss:
         background_loss = self.bkg_loss(
-            pd, po, pt, pp, hallucination_mask=self.hallucination_mask
+            structure_predictions, hallucination_mask=self.hallucination_mask
         )
 
         # aa composition loss
@@ -307,7 +308,7 @@ class MCMC_Optimizer(torch.nn.Module):
 
                 if self.step % (nsave * 2) == 0:
                     distogram_distribution = (
-                        structure_predictions[2].detach().cpu().numpy()
+                        structure_predictions['dist'].detach().cpu().numpy()
                     )
                     distogram = distogram_distribution_to_distogram(
                         distogram_distribution
@@ -347,7 +348,7 @@ class MCMC_Optimizer(torch.nn.Module):
         self.best_metrics["sequence"] = self.best_sequence
 
         # Dump distogram:
-        best_distogram_distribution = structure_predictions[2].detach().cpu().numpy()
+        best_distogram_distribution = structure_predictions['dist'].detach().cpu().numpy()
         distogram = distogram_distribution_to_distogram(best_distogram_distribution)
         plot_distogram(
             distogram,

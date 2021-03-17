@@ -21,32 +21,27 @@ sys.path[0:0] = [str(script_dir / "src"), str(script_dir)]
 from tr_Rosetta_model import trRosettaEnsemble, preprocess
 import utils
 
-
 def get_ensembled_predictions(input_file, output_file=None):
     """Use an ensemble of pre-trained networks to predict the structure of an MSA file."""
     ensemble_model = trRosettaEnsemble()
 
     input_path = Path(input_file)
     input_data, _ = preprocess(msa_file=input_path)
-    # input_data, _ = preprocess(use_random_seq = True)
 
     output_path = (
         Path(output_file)
         if output_file
         else input_path.parent / f"{input_path.stem}.npz"
     )
-    # prob_theta, prob_phi, prob_distance, prob_omega
+    # prob_distance, prob_omega, prob_theta, prob_phi
     outputs = [model(input_data) for model in ensemble_model.models]
-    averaged_outputs = [
-        torch.stack(model_output).mean(dim=0).cpu().detach().numpy()
-        for model_output in zip(*outputs)
-    ]
-    output_dict = dict(zip(["theta", "phi", "dist", "omega"], averaged_outputs))
-    np.savez_compressed(output_path, **output_dict)
+    averaged_outputs = utils.average_dict(outputs, detach = True)
+
+    np.savez_compressed(output_path, **averaged_outputs)
     print(f"predictions for {input_path} saved to {output_path}")
 
     utils.plot_distogram(
-        utils.distogram_distribution_to_distogram(output_dict["dist"]),
+        utils.distogram_distribution_to_distogram(averaged_outputs["dist"]),
         f"{input_file}_dist.jpg",
     )
 
