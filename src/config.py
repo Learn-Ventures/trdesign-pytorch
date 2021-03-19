@@ -14,7 +14,7 @@ n_models = 1  # How many structure prediction models to ensemble? [1-5]
 
 # MCMC schedule:
 MCMC = {}
-MCMC["BETA_START"] = 10  # Energy multiplier for the metropolis criterion
+MCMC["BETA_START"] = 25  # Energy multiplier for the metropolis criterion
 MCMC["N_STEPS"] = 500  # Number of steps for each MCMC optimization
 MCMC["COEF"] = 1.25  # Divide BETA by COEF
 MCMC["M"] = MCMC["N_STEPS"] // 10  # Adjust beta every M steps
